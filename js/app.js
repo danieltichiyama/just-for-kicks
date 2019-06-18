@@ -81,6 +81,27 @@ function goUp (cost){
 
 //6. Add an event to the minus icon that will decrement the price of the Air Jordan VI shoe each time the icon is clicked on.
 
+var plusIcons = document.querySelectorAll ('#decrease');
+
+for (i=0;i<plusIcons.length;i++){
+    // console.log(plusIcons[i]);
+    plusIcons[i].addEventListener('click', goUp);
+    plusIcons[i].count = parseInt(plusIcons[i].parentElement.childNodes[0].textContent);
+    console.log (plusIcons[i].count);
+}
+
+
+
+function goUp (cost){
+    console.log('count before ++', this.count)
+    console.log (this.parentElement.childNodes);
+    console.log(this.count);
+
+    const num = parseInt(this.parentElement.childNodes[0].textContent);
+
+    this.parentElement.childNodes[0].textContent = num-this.count;
+}
+
 //7. Add an event to the Air Jordan XI shoe that will show another colorway for that shoe after hovering over the image. 
 
 //8. Add an event to the Air Jordan XII shoe that will increase the image by 50% after clicking on the image.
