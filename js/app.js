@@ -8,11 +8,10 @@ function availAlert (){
 
 //2. Add an event to the div element with the id of 'name1' that will show/hide the description ('descrip1') after hovering over Air Jordan II.
 
-document.querySelector('#name1').addEventListener('mouseover',showHide);
-
-function showHide(){
-    // console.log('test');
-    var descrip = document.querySelector ('#descrip1');
+function showHide(event){
+    // console.log(typeof event.target.firstElementChild.id);
+    var descrip = document.querySelector("#"+event.target.firstElementChild.id);
+    // console.log(descrip);
     if (descrip.style.display == 'inherit'){
         descrip.style.display = 'none';
     }else{
@@ -21,8 +20,18 @@ function showHide(){
     }
 }
 
+document.querySelector('#name1').addEventListener('mouseover',showHide);
+
 //3. Add an event to the div element with the id of 'name2' that will show/hide the following description after clicking on the element.
 //'The instantly recognizable Jumpman silhouette made its debut with the Air Jordan 3 during Michael Jordan's 1987-88 NBA season.'
+
+var descrip2 = document.createElement('div');
+descrip2.id = 'descrip2';
+descrip2.innerHTML = "The instantly recognizable Jumpman silhouette made its debut with the Air Jordan 3 during Michael Jordan's 1987-88 NBA season.";
+document.querySelector('#name2').appendChild (descrip2);
+
+
+document.querySelector('#name2').addEventListener('click',showHide);
 
 
 //You'll need to:
@@ -31,7 +40,44 @@ function showHide(){
 
 //4. Add events to the all the thumbs up icon that will add a count for each time the icon is clicked on for any shoe.
 
+    var iTags = document.querySelectorAll ('i');
+    // console.log(iTags);
+
+    for (i=0;i<iTags.length;i++){
+        // console.log(iTags);
+        iTags[i].innerHTML = 0;
+        // console.log(typeof iTags[i].innerHTML);
+        iTags[i].addEventListener('click',plusOne)
+    }
+
+    function plusOne (event){
+        // console.log(event.target);
+        event.target.innerHTML = parseInt(event.target.innerHTML) + 1;
+
+    }
+
 //5. Add an event to the plus icon that will increment the price of the Air Jordan V shoe each time the icon is clicked on.
+
+var plusIcons = document.querySelectorAll ('#increase');
+
+for (i=0;i<plusIcons.length;i++){
+    // console.log(plusIcons[i]);
+    plusIcons[i].addEventListener('click', goUp);
+    plusIcons[i].count = parseInt(plusIcons[i].parentElement.childNodes[0].textContent);
+    console.log (plusIcons[i].count);
+}
+
+
+
+function goUp (cost){
+    console.log('count before ++', this.count)
+    console.log (this.parentElement.childNodes);
+    console.log(this.count);
+
+    const num = parseInt(this.parentElement.childNodes[0].textContent);
+
+    this.parentElement.childNodes[0].textContent = num+this.count;
+}
 
 //6. Add an event to the minus icon that will decrement the price of the Air Jordan VI shoe each time the icon is clicked on.
 
